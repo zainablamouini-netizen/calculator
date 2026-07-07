@@ -2,65 +2,42 @@ import React, { useState, useRef } from 'react'
 import './App.css'
 
 function App() {
-  const [result, setResult] = useState('')
-  const [error, setError] = useState('')
+  const [result, setResult] = useState(0)
   const inputRef = useRef(null)
 
-  const handleOperation = (operation) => {
-    setError('')
+  const add = () => {
     const inputValue = inputRef.current.value
-
-    if (!inputValue) {
-      setError('Please enter a number')
-      return
-    }
-
     const num = parseFloat(inputValue)
+    setResult(result + num)
+  }
 
-    if (isNaN(num)) {
-      setError('Please enter a valid number')
+  const minus = () => {
+    const inputValue = inputRef.current.value
+    const num = parseFloat(inputValue)
+    setResult(result - num)
+  }
+
+  const times = () => {
+    const inputValue = inputRef.current.value
+    const num = parseFloat(inputValue)
+    setResult(result * num)
+  }
+
+  const divide = () => {
+    const inputValue = inputRef.current.value
+    const num = parseFloat(inputValue)
+    if (num === 0) {
       return
     }
-
-    let calculatedResult
-    switch (operation) {
-      case 'add':
-        calculatedResult = num + num
-        break
-      case 'subtract':
-        calculatedResult = num - num
-        break
-      case 'multiply':
-        calculatedResult = num * num
-        break
-      case 'divide':
-        if (num === 0) {
-          setError('Cannot divide by zero')
-          return
-        }
-        calculatedResult = num / num
-        break
-      default:
-        return
-    }
-
-    setResult(calculatedResult.toString())
+    setResult(result / num)
   }
 
   const resetInput = () => {
     inputRef.current.value = ''
-    setError('')
   }
 
   const resetResult = () => {
-    setResult('')
-    setError('')
-  }
-
-  const resetAll = () => {
-    inputRef.current.value = ''
-    setResult('')
-    setError('')
+    setResult(0)
   }
 
   return (
@@ -76,25 +53,23 @@ function App() {
         />
       </div>
 
-      {error && <div className="error">{error}</div>}
-
       <div className="result-section">
         <label>Result:</label>
-        <div className="result-display">{result || '0'}</div>
+        <div className="result-display">{result}</div>
       </div>
 
       <div className="operations">
-        <button onClick={() => handleOperation('add')} className="btn add">
-          + Add
+        <button onClick={add} className="btn add">
+          Add
         </button>
-        <button onClick={() => handleOperation('subtract')} className="btn subtract">
-          - Subtract
+        <button onClick={minus} className="btn subtract">
+          Subtract
         </button>
-        <button onClick={() => handleOperation('multiply')} className="btn multiply">
-          × Multiply
+        <button onClick={times} className="btn multiply">
+          Multiply
         </button>
-        <button onClick={() => handleOperation('divide')} className="btn divide">
-          ÷ Divide
+        <button onClick={divide} className="btn divide">
+          Divide
         </button>
       </div>
 
@@ -104,9 +79,6 @@ function App() {
         </button>
         <button onClick={resetResult} className="btn reset">
           Reset Result
-        </button>
-        <button onClick={resetAll} className="btn reset-all">
-          Reset All
         </button>
       </div>
     </div>
