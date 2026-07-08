@@ -59,27 +59,15 @@ function App() {
       </div>
 
       <div className="operations">
-        <button onClick={add} className="btn add">
-          Add
-        </button>
-        <button onClick={minus} className="btn subtract">
-          Subtract
-        </button>
-        <button onClick={times} className="btn multiply">
-          Multiply
-        </button>
-        <button onClick={divide} className="btn divide">
-          Divide
-        </button>
+        <button onClick={add}>Add</button>
+        <button onClick={minus}>Subtract</button>
+        <button onClick={times}>Multiply</button>
+        <button onClick={divide}>Divide</button>
       </div>
 
       <div className="reset-buttons">
-        <button onClick={resetInput} className="btn reset">
-          Reset Input
-        </button>
-        <button onClick={resetResult} className="btn reset">
-          Reset Result
-        </button>
+        <button onClick={resetInput}>Reset Input</button>
+        <button onClick={resetResult}>Reset Result</button>
       </div>
     </div>
   )
